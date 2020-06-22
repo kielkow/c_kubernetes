@@ -1,0 +1,8 @@
+Aplicar configs do projeto:
+-> kubectl apply -f ./k8s
+
+Listar pods:
+-> kubectl get pods
+
+Listar services:
+-> kubectl get svc
