@@ -6,3 +6,9 @@ Listar pods:
 
 Listar services:
 -> kubectl get svc
+
+Mostrar logs de um pod:
+-> kubectl logs <nome do pod>
+
+Describe de um node:
+-> kubectl describe pods <nome do pod>
