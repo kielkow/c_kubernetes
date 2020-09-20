@@ -22,3 +22,10 @@ Deletar pod:
 
 Restart um deployment:
 -> kubectl rollout restart deployment [depl_name]
+
+Listar deployments:
+-> kubectl get deployments
+
+Aplicar configs do deployment:
+-> kubectl apply -f [pod_file_name]
+   example: kubectl apply -f posts-depl.yaml
