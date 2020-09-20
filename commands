@@ -11,4 +11,11 @@ Mostrar logs de um pod:
 -> kubectl logs <nome do pod>
 
 Describe de um node:
--> kubectl describe pods <nome do pod>
+-> kubectl describe pod <nome do pod>
+
+Executar comando em um pod:
+-> kubectl exec -it [pod_name] [cmd]
+   example: kubectl exec -it posts sh
+
+Deletar pod:
+-> kubectl delete pod [pod_name]
