@@ -19,3 +19,6 @@ Executar comando em um pod:
 
 Deletar pod:
 -> kubectl delete pod [pod_name]
+
+Restart um deployment:
+-> kubectl rollout restart deployment [depl_name]
