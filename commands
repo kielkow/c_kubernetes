@@ -29,3 +29,6 @@ Listar deployments:
 Aplicar configs do deployment:
 -> kubectl apply -f [pod_file_name]
    example: kubectl apply -f posts-depl.yaml
+
+Executar Skaffold file:
+-> skaffold dev
