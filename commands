@@ -1,6 +1,7 @@
 Obs:
 - Services do tipo ClusterIP dispobilizam um IP que só pode ser acessado dentro do próprio cluster.
 - Services do tipo NodePort dispobilizam um IP e uma porta para que um pod possa ser acessado fora do cluster.
+- Services do tipo LoadBalancer dispobilizam um LoadBalancer para o pod criado. Costuma ser necessário ter uma integração com o Cloud Provider.
 
 Instalar kubectl:
 -> curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
@@ -97,6 +98,7 @@ Criar pod:
 Criar service para expor pod:
 -> kubectl expose pod [pod_name]
 -> kubectl expose pod [pod_name] --type NodePort (torna pod acessivel fora do cluster)
+-> kubectl expose pod [pod_name] --type LoadBalancer (costuma precisar de integração com o cloud provider)
 
 Deletar service:
 -> kubectl delete service [service_name]
