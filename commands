@@ -5,6 +5,7 @@ Obs:
 -> Services do tipo NodePort dispobilizam um IP e uma porta para que um pod possa ser acessado fora do cluster.
 -> Services do tipo LoadBalancer dispobilizam um LoadBalancer para o pod criado. Costuma ser necessário ter uma integração com o Cloud Provider.
 -> O trecho '--dry-run=client -o yaml' ao final de todo comando, simula o comportamento e gera o yaml dele.
+-> Os endpoints são o IP e a porta que os pods estão sendo expostos. Por exemplo, um pod rodando um nginx sendo exposto no endpoint 192.168.4.184:80.
 
 Instalar kubectl:
 -> curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
@@ -140,3 +141,6 @@ Aplica arquivo yaml do deployment:
 
 Explica camada do kubernetes:
 -> kubectl explain [pod, service, deployment, namespace, ingress, ...]
+
+Listar endpoints:
+-> kubectl get endpoints -n [namespace_name]
