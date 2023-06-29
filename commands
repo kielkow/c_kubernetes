@@ -1,4 +1,6 @@
 Obs:
+- Um pod pode ser composto por um ou mais containers.
+- Toda vez que um deployment é criado, um replicaset é criado também. Pois é o replicaset que faz o controle das replicas dos pods do deployment.
 - Services do tipo ClusterIP dispobilizam um IP que só pode ser acessado dentro do próprio cluster.
 - Services do tipo NodePort dispobilizam um IP e uma porta para que um pod possa ser acessado fora do cluster.
 - Services do tipo LoadBalancer dispobilizam um LoadBalancer para o pod criado. Costuma ser necessário ter uma integração com o Cloud Provider.
@@ -42,6 +44,7 @@ Listar pods:
 
 Listar services:
 -> kubectl get svc
+-> kubectl get svc -n [namespace_name]
 
 Mostrar logs de um pod:
 -> kubectl logs [pod_name]
@@ -62,6 +65,7 @@ Restart um deployment:
 
 Listar deployments:
 -> kubectl get deployments
+-> kubectl get deployments -n [namespace_name]
 
 Aplicar configs do deployment:
 -> kubectl apply -f [pod_file_name]
@@ -107,3 +111,18 @@ Deletar service:
 Acessar um container:
 -> kubectl exec -ti [container_name] bash
    example: -> kubectl exec -ti nginx bash
+
+Criar namespace:
+-> kubectl create namespace [namespace_name]
+
+Criar deployment:
+-> kubectl create deployment [deployment_name] --image [image_name] --replicas [number_of_replicas] -n [namespace_name] --port [port_number]
+   example: kubectl create deployment deploy --image nginx --replicas 3 -n production --port 80
+
+Criar service para expor deployment:
+-> kubectl expose deployment -n [namespace_name] [deployment_name]
+-> kubectl expose deployment -n [namespace_name] [deployment_name] --type NodePort
+-> kubectl expose deployment -n [namespace_name] [deployment_name] --type LoadBalancer
+
+Listar replicasets:
+-> kubectl get replicaset -n [namespace_name]
