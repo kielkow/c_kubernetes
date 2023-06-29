@@ -44,7 +44,8 @@ Listar services:
 -> kubectl get svc
 
 Mostrar logs de um pod:
--> kubectl logs <nome do pod>
+-> kubectl logs [pod_name]
+-> kubectl logs -f [pod_name] (mostra os logs em tempo real)
 
 Describe de um node:
 -> kubectl describe pod <nome do pod>
@@ -102,3 +103,7 @@ Criar service para expor pod:
 
 Deletar service:
 -> kubectl delete service [service_name]
+
+Acessar um container:
+-> kubectl exec -ti [container_name] bash
+   example: -> kubectl exec -ti nginx bash
