@@ -126,3 +126,6 @@ Criar service para expor deployment:
 
 Listar replicasets:
 -> kubectl get replicaset -n [namespace_name]
+
+Deletar deployment:
+-> kubectl delete deploy [deployment_name] -n [namespace_name]
