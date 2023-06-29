@@ -1,9 +1,10 @@
 Obs:
-- Um pod pode ser composto por um ou mais containers.
-- Toda vez que um deployment é criado, um replicaset é criado também. Pois é o replicaset que faz o controle das replicas dos pods do deployment.
-- Services do tipo ClusterIP dispobilizam um IP que só pode ser acessado dentro do próprio cluster.
-- Services do tipo NodePort dispobilizam um IP e uma porta para que um pod possa ser acessado fora do cluster.
-- Services do tipo LoadBalancer dispobilizam um LoadBalancer para o pod criado. Costuma ser necessário ter uma integração com o Cloud Provider.
+-> Um pod pode ser composto por um ou mais containers.
+-> Toda vez que um deployment é criado, um replicaset é criado também. Pois é o replicaset que faz o controle das replicas dos pods do deployment.
+-> Services do tipo ClusterIP dispobilizam um IP que só pode ser acessado dentro do próprio cluster.
+-> Services do tipo NodePort dispobilizam um IP e uma porta para que um pod possa ser acessado fora do cluster.
+-> Services do tipo LoadBalancer dispobilizam um LoadBalancer para o pod criado. Costuma ser necessário ter uma integração com o Cloud Provider.
+-> O trecho '--dry-run=client -o yaml' ao final de todo comando, simula o comportamento e gera o yaml dele.
 
 Instalar kubectl:
 -> curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
@@ -118,6 +119,10 @@ Criar namespace:
 Criar deployment:
 -> kubectl create deployment [deployment_name] --image [image_name] --replicas [number_of_replicas] -n [namespace_name] --port [port_number]
    example: kubectl create deployment deploy --image nginx --replicas 3 -n production --port 80
+-> kubectl create deployment [deployment_name] --image [image_name] --replicas [number_of_replicas] -n [namespace_name] --port [port_number] --dry-run=client -o yaml
+   (imprime o yaml gerado pelo comando de criação)
+-> kubectl create deployment [deployment_name] --image [image_name] --replicas [number_of_replicas] -n [namespace_name] --port [port_number] --dry-run=client -o yaml > my-deployment.yaml
+   (cria o arquivo yaml gerado pelo comando de criação)
 
 Criar service para expor deployment:
 -> kubectl expose deployment -n [namespace_name] [deployment_name]
@@ -129,3 +134,6 @@ Listar replicasets:
 
 Deletar deployment:
 -> kubectl delete deploy [deployment_name] -n [namespace_name]
+
+Aplica arquivo yaml do deployment:
+-> kubectl apply -f my-deploy.yaml
