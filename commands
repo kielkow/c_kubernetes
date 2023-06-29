@@ -66,3 +66,18 @@ Executar Skaffold file:
 
 Criar alias:
 -> alias k=kubectl
+
+Describe node:
+-> kubectl describe nodes -n [node_name]
+
+Listar pods:
+-> kubectl get pods
+-> kubectl get pods -A (lista todos os pods de todos os namespaces)
+-> kubectl get pods -A -o wide (lista todos os pods de todos os namespaces, informando o node)
+-> kubectl get pods -n [namespace_name]
+
+Describe pod:
+-> kubectl describe pods -n [namespace_name] [pod_name]
+
+Listar namespaces:
+-> kubectl get namespaces
