@@ -137,3 +137,6 @@ Deletar deployment:
 
 Aplica arquivo yaml do deployment:
 -> kubectl apply -f my-deploy.yaml
+
+Explica camada do kubernetes:
+-> kubectl explain [pod, service, deployment, namespace, ingress, ...]
