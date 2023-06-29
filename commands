@@ -63,3 +63,6 @@ Aplicar configs do deployment:
 
 Executar Skaffold file:
 -> skaffold dev
+
+Criar alias:
+-> alias k=kubectl
