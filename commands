@@ -1,3 +1,7 @@
+Obs:
+- Services do tipo ClusterIP dispobilizam um IP que só pode ser acessado dentro do próprio cluster.
+- Services do tipo NodePort dispobilizam um IP e uma porta para que um pod possa ser acessado fora do cluster.
+
 Instalar kubectl:
 -> curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 -> chmod +x ./kubectl
@@ -77,7 +81,22 @@ Listar pods:
 -> kubectl get pods -n [namespace_name]
 
 Describe pod:
+-> kubectl describe pods [pod_name]
 -> kubectl describe pods -n [namespace_name] [pod_name]
 
 Listar namespaces:
 -> kubectl get namespaces
+
+Criar pod:
+-> kubectl run [pod_name] --image [image_name]
+   example: kubectl run nginx --image nginx
+
+-> kubectl run [pod_name] --image [image_name] --port [port_number]
+   example: kubectl run nginx --image nginx --port 80
+
+Criar service para expor pod:
+-> kubectl expose pod [pod_name]
+-> kubectl expose pod [pod_name] --type NodePort (torna pod acessivel fora do cluster)
+
+Deletar service:
+-> kubectl delete service [service_name]
