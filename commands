@@ -6,6 +6,11 @@ Obs:
 -> Services do tipo LoadBalancer dispobilizam um LoadBalancer para o pod criado. Costuma ser necessário ter uma integração com o Cloud Provider.
 -> O trecho '--dry-run=client -o yaml' ao final de todo comando, simula o comportamento e gera o yaml dele.
 -> Os endpoints são o IP e a porta que os pods estão sendo expostos. Por exemplo, um pod rodando um nginx sendo exposto no endpoint 192.168.4.184:80.
+-> Probes são formas de monitorar e garantir o estado saudável dos contêineres em execução. Existem 3 tipos:
+   1. Liveness: Verifica se o contêiner está em execução e funcionando corretamente. Se a sonda de vida falhar, o Kubernetes reiniciará automaticamente o contêiner.
+   2. Readiness: Verifica se o contêiner está pronto para receber tráfego. Se a sonda de prontidão falhar, o Kubernetes removerá o Pod dos endpoints de serviço, indicando que o Pod não está pronto para lidar com solicitações.
+   3. Startup: Verifica se o contêiner está em processo de inicialização. É útil para aplicativos que podem levar algum tempo para se iniciar completamente. O Kubernetes aguardará a sonda de inicialização ter sucesso antes de considerar o contêiner como pronto.
+-> O Ingress é usado para gerenciar o acesso externo aos serviços dentro do cluster Kubernetes.
 -> Documentação: https://livro.descomplicandokubernetes.com.br/pt/.
 
 Instalar kubectl:
