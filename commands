@@ -150,3 +150,91 @@ Explica camada do kubernetes:
 
 Listar endpoints:
 -> kubectl get endpoints -n [namespace_name]
+
+Exemplo de service e deployment:
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-server
+  namespace: api-server
+spec:
+  ports:
+  - port: 80
+  selector:
+    run: api-server
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    tags.datadoghq.com/env: development
+    tags.datadoghq.com/service: api-server
+    tags.datadoghq.com/version: v1
+  name: api-server
+  namespace: api-server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      run: api-server
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        run: api-server
+        tags.datadoghq.com/env: development
+        tags.datadoghq.com/service: api-server
+        tags.datadoghq.com/version: v1
+    spec:
+      containers:
+      - env:
+        - name: DD_AGENT_HOST
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        - name: DD_ENV
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['tags.datadoghq.com/env']
+        - name: DD_VERSION
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['tags.datadoghq.com/version']
+        - name: DD_LOGS_INJECTION
+          value: "true"
+        envFrom:
+        - configMapRef:
+            name: api-server-env
+        image: api-server:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /status-health
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 20
+          timeoutSeconds: 1
+        name: api-server
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /status-health
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 20
+          timeoutSeconds: 1
+        resources:
+          limits:
+            memory: 500Mi
+          requests:
+            memory: 350Mi
+      imagePullSecrets:
+      - name: dockerhub
